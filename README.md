@@ -148,6 +148,7 @@ An alphabetical list of supported options in a subnet declaration:
 | `domain_name_servers` |    no    | List of domain name servers for this subnet(1)                        |
 | `domain_search`       |    no    | List of domain names for resolution of non-FQDNs(1)                   |
 | `filename`            |    no    | filename to retrieve from boot server                                 |
+| `groups`              |    no    | A Group within a subnet with options and hosts, similar to groups     |
 | `hosts`               |    no    | List of fixed IP address hosts for each subnet, similar to dhcp_hosts |
 | `interface`           |    no    | Overrides the `interface` of the subnet declaration                   |
 | `ip`                  |   yes    | **Required.** IP address of the subnet                                |

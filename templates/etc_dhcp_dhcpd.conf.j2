@@ -239,12 +239,26 @@ subnet {{ subnet.ip }} netmask {{ subnet.netmask }} {
   option {{ opt }} {{ subnet.options[opt] }};
 {% endfor %}
 {% endif %}
+{% if subnet.groups is defined %}
+{% for group in subnet.groups %}
+  group {
+    # {{ group.name }}
+{% if group.options is defined %}
+{% for opt in group.options %}
+    {{ opt }};
+{% endfor %}
+{% endif %}
+{% if group.hosts is defined %}
+{% for host in group.hosts %}
+    host {{ host.name }} { hardware ethernet {{ host.mac }}; fixed-address {{ host.ip }}; }
+{% endfor %}
+{% endif %}
+  }
+{% endfor %}
+{% endif %}
 {% if subnet.hosts is defined %}
 {% for host in subnet.hosts %}
-  host {{ host.name }} {
-    hardware ethernet {{ host.mac }};
-    fixed-address {{ host.ip }};
-  }
+  host {{ host.name }} { hardware ethernet {{ host.mac }}; fixed-address {{ host.ip }}; }
 {% endfor %}
 {% endif %}
 {% if subnet.pools is defined %}
