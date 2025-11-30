@@ -22,35 +22,39 @@ The following variables, when set, will be added to the global section of the DH
 
 See the [dhcp-options(5)](http://linux.die.net/man/5/dhcp-options) man page for more information about these options.
 
-| Variable                          | Comments                                                               |
-| :-------------------------------- | :--------------------------------------------------------------------- |
-| `dhcp_global_authoritative`       | Global authoritative statement (`authoritative`, `not authoritative`)  |
-| `dhcp_global_booting`             | Global booting (`allow`, `deny`, `ignore`)                             |
-| `dhcp_global_bootp`               | Global bootp (`allow`, `deny`, `ignore`)                               |
-| `dhcp_global_broadcast_address`   | Global broadcast address                                               |
-| `dhcp_global_classes`             | Class definitions with a match statement(1)                            |
-| `dhcp_global_default_lease_time`  | Default lease time in seconds                                          |
-| `dhcp_global_domain_name_servers` | A list of IP addresses of DNS servers(2)                               |
-| `dhcp_global_domain_name`         | The domain name the client should use when resolving host names        |
-| `dhcp_global_domain_search`       | A list of domain names to be used by the client to locate non-FQDNs(1) |
-| `dhcp_global_failover`            | Failover peer settings (3)                                             |
-| `dhcp_global_failover_peer`       | Name for the failover peer (e.g. `foo`)                                |
-| `dhcp_global_filename`            | Filename to request for boot                                           |
-| `dhcp_global_includes_missing`    | Boolean.  Continue if `includes` file(s) missing from role's files/    |
-| `dhcp_global_includes`            | List of config files to be included (from `dhcp_config_dir`)           |
-| `dhcp_global_log_facility`        | Global log facility (e.g. `daemon`, `syslog`, `user`, ...)             |
-| `dhcp_global_max_lease_time`      | Maximum lease time in seconds                                          |
-| `dhcp_global_next_server`         | IP for PXEboot server                                                  |
-| `dhcp_global_ntp_servers`         | List of IP addresses of NTP servers                                    |
-| `dhcp_global_omapi_port`          | OMAPI port                                                             |
-| `dhcp_global_omapi_secret`        | OMAPI secret                                                           |
-| `dhcp_global_other_options`       | Array of arbitrary additional global options                           |
-| `dhcp_global_routers`             | IP address of the router                                               |
-| `dhcp_global_server_name`         | Server name sent to the client                                         |
-| `dhcp_global_server_state`        | Service state (started, stopped)                                       |
-| `dhcp_global_subnet_mask`         | Global subnet mask                                                     |
-| `dhcp_custom_includes`            | List of jinja config files to be included (from `dhcp_config_dir`)     |
-| `dhcp_custom_includes_modes`      | List of modes for the destination custom config file                   |
+| Variable                           | Comments                                                               |
+| :--------------------------------  | :--------------------------------------------------------------------- |
+| `dhcp_global_authoritative`        | Global authoritative statement (`authoritative`, `not authoritative`)  |
+| `dhcp_global_booting`              | Global booting (`allow`, `deny`, `ignore`)                             |
+| `dhcp_global_bootp`                | Global bootp (`allow`, `deny`, `ignore`)                               |
+| `dhcp_global_broadcast_address`    | Global broadcast address                                               |
+| `dhcp_global_classes`              | Class definitions with a match statement(1)                            |
+| `dhcp_global_ddns_updates`         | Global Dynamic DNS                                                     |
+| `dhcp_global_ddns_update_style`    | Global Dynamic DNS                                                     |
+| `dhcp_global_default_lease_time`   | Default lease time in seconds                                          |
+| `dhcp_global_domain_name_servers`  | A list of IP addresses of DNS servers(2)                               |
+| `dhcp_global_domain_name`          | The domain name the client should use when resolving host names        |
+| `dhcp_global_domain_search`        | A list of domain names to be used by the client to locate non-FQDNs(1) |
+| `dhcp_global_failover`             | Failover peer settings (3)                                             |
+| `dhcp_global_failover_peer`        | Name for the failover peer (e.g. `foo`)                                |
+| `dhcp_global_filename`             | Filename to request for boot                                           |
+| `dhcp_global_ignore`               | Global ignore                                                          |
+| `dhcp_global_includes_missing`     | Boolean.  Continue if `includes` file(s) missing from role's files/    |
+| `dhcp_global_includes`             | List of config files to be included (from `dhcp_config_dir`)           |
+| `dhcp_global_log_facility`         | Global log facility (e.g. `daemon`, `syslog`, `user`, ...)             |
+| `dhcp_global_max_lease_time`       | Maximum lease time in seconds                                          |
+| `dhcp_global_next_server`          | IP for PXEboot server                                                  |
+| `dhcp_global_ntp_servers`          | List of IP addresses of NTP servers                                    |
+| `dhcp_global_omapi_port`           | OMAPI port                                                             |
+| `dhcp_global_omapi_secret`         | OMAPI secret                                                           |
+| `dhcp_global_other_options`        | Array of arbitrary additional global options                           |
+| `dhcp_global_routers`              | IP address of the router                                               |
+| `dhcp_global_server_name`          | Server name sent to the client                                         |
+| `dhcp_global_server_state`         | Service state (started, stopped)                                       |
+| `dhcp_global_subnet_mask`          | Global subnet mask                                                     |
+| `dhcp_global_update_static_leases` | Global update static leases configuration                              |
+| `dhcp_custom_includes`             | List of jinja config files to be included (from `dhcp_config_dir`)     |
+| `dhcp_custom_includes_modes`       | List of modes for the destination custom config file                   |
 
 **Remarks**
 
@@ -142,27 +146,29 @@ An alphabetical list of supported options in a subnet declaration:
 
 | Option                | Required | Comment                                                               |
 | :-------------------- | :------: | :-------------------------------------------------------------------- |
-| `booting`             |    no    | allow,deny,ignore                                                     |
-| `bootp`               |    no    | allow,deny,ignore                                                     |
-| `default_lease_time`  |    no    | Default lease time for this subnet (in seconds)                       |
-| `domain_name_servers` |    no    | List of domain name servers for this subnet(1)                        |
-| `domain_search`       |    no    | List of domain names for resolution of non-FQDNs(1)                   |
-| `filename`            |    no    | filename to retrieve from boot server                                 |
-| `groups`              |    no    | A Group within a subnet with options and hosts, similar to groups     |
-| `hosts`               |    no    | List of fixed IP address hosts for each subnet, similar to dhcp_hosts |
-| `interface`           |    no    | Overrides the `interface` of the subnet declaration                   |
-| `ip`                  |   yes    | **Required.** IP address of the subnet                                |
-| `max_lease_time`      |    no    | Maximum lease time for this subnet (in seconds)                       |
-| `netmask`             |   yes    | **Required.** Network mask of the subnet (in dotted decimal notation) |
-| `next_server`         |    no    | IP address of the boot server                                         |
-| `ntp_servers`         |    no    | List of NTP servers for this subnet                                   |
-| `range_begin`         |    no    | Lowest address in the range of dynamic IP addresses to be assigned    |
-| `range_end`           |    no    | Highest address in the range of dynamic IP addresses to be assigned   |
-| `ranges`              |    no    | If multiple ranges are needed, they can be specified as a list (2)    |
-| `routers`             |    no    | IP address of the gateway for this subnet                             |
-| `server_name`         |    no    | Server name sent to the client                                        |
-| `subnet_mask`         |    no    | Overrides the `netmask` of the subnet declaration                     |
-| `options`             |    no    | A dict of options to add to this subnet                               |
+| `booting`             | no       | allow,deny,ignore                                                     |
+| `bootp`               | no       | allow,deny,ignore                                                     |
+| `ddns_domainname`     | no       | Dynamic DNS                                                           |
+| `ddns_rev_domainname` | no       | Dynamic DNS                                                           |
+| `default_lease_time`  | no       | Default lease time for this subnet (in seconds)                       |
+| `domain_name_servers` | no       | List of domain name servers for this subnet(1)                        |
+| `domain_search`       | no       | List of domain names for resolution of non-FQDNs(1)                   |
+| `filename`            | no       | filename to retrieve from boot server                                 |
+| `groups`              | no       | A Group within a subnet with options and hosts, similar to groups     |
+| `hosts`               | no       | List of fixed IP address hosts for each subnet, similar to dhcp_hosts |
+| `interface`           | no       | Overrides the `interface` of the subnet declaration                   |
+| `ip`                  | yes      | **Required.** IP address of the subnet                                |
+| `max_lease_time`      | no       | Maximum lease time for this subnet (in seconds)                       |
+| `netmask`             | yes      | **Required.** Network mask of the subnet (in dotted decimal notation) |
+| `next_server`         | no       | IP address of the boot server                                         |
+| `ntp_servers`         | no       | List of NTP servers for this subnet                                   |
+| `range_begin`         | no       | Lowest address in the range of dynamic IP addresses to be assigned    |
+| `range_end`           | no       | Highest address in the range of dynamic IP addresses to be assigned   |
+| `ranges`              | no       | If multiple ranges are needed, they can be specified as a list (2)    |
+| `routers`             | no       | IP address of the gateway for this subnet                             |
+| `server_name`         | no       | Server name sent to the client                                        |
+| `subnet_mask`         | no       | Overrides the `netmask` of the subnet declaration                     |
+| `options`             | no       | A dict of options to add to this subnet                               |
 
 You can specify address pools within a subnet by setting the `pools` options. This allows you to specify a pool of addresses that will be treated differently than another pool of addresses, even on the same network segment or subnet. It is a list of dicts with the following keys, all of which are optional:
 
@@ -200,12 +206,13 @@ ranges:
 
 You can specify hosts that should get a fixed IP address based on their MAC by setting the `dhcp_hosts` option. This is a list of dicts with the following three keys, of which `name` and `mac` are mandatory:
 
-| Option     | Comment                                         |
-| :--------- | :---------------------------------------------- |
-| `name`     | The name of the host                            |
-| `mac`      | The MAC address of the host                     |
-| `ip`       | The IP address to be assigned to the host       |
-| `hostname` | Hostname to be assigned through DHCP (optional) |
+| Option          | Comment                                         |
+| :---------      | :---------------------------------------------- |
+| `name`          | The name of the host                            |
+| `mac`           | The MAC address of the host                     |
+| `ip`            | The IP address to be assigned to the host       |
+| `hostname`      | Hostname to be assigned through DHCP (optional) |
+| `ddns_hostname` | Dynamic DNS hostname                            |
 
 ```Yaml
 dhcp_hosts:
@@ -215,6 +222,18 @@ dhcp_hosts:
   - name: cl2
     mac: '00:de:ad:be:ef:00'
     ip: 192.168.222.151
+```
+
+### Specify DNS Zone Declarations
+
+Setting the array `dhcp_dns_zones`, DNS zones can be defined.
+
+```yaml
+dhcp_dns_zones:
+  - name: example.com
+    primary: 192.168.122.15
+    algorithm: hmac-md5
+    secret: keykeykey
 ```
 
 ### Specify PXEBoot server
