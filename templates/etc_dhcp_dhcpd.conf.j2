@@ -202,6 +202,9 @@ subnet {{ subnet.ip }} netmask {{ subnet.netmask }} {
 {% if subnet.subnet_mask is defined %}
   option subnet-mask {{ subnet.subnet_mask }};
 {% endif %}
+{% if subnet.broadcast_address is defined %}
+  option broadcast-address {{ subnet.broadcast_address }};
+{% endif %}
 {% if subnet.domain_search is defined %}
 {% if subnet.domain_search is string %}
   option domain-search "{{ subnet.domain_search }}";
