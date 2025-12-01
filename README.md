@@ -167,6 +167,7 @@ An alphabetical list of supported options in a subnet declaration:
 | `range_end`           | no       | Highest address in the range of dynamic IP addresses to be assigned   |
 | `ranges`              | no       | If multiple ranges are needed, they can be specified as a list (2)    |
 | `routers`             | no       | IP address of the gateway for this subnet                             |
+| `server_identifier`   | no       | Binds DHCPd server to specified IP                                    |
 | `server_name`         | no       | Server name sent to the client                                        |
 | `subnet_mask`         | no       | Overrides the `netmask` of the subnet declaration                     |
 | `options`             | no       | A dict of options to add to this subnet                               |
